@@ -4,7 +4,7 @@ The Kinisis Interface process kcl processRecords method and send records to a de
 
 When receive a response from the destination, some actions need to be made:
 
-#### status code 200 (every think is ok)
+#### status code 200 (everything is ok)
 
 1. Move kinesis pointer using checkpoint method with the last.
 2. execute the callback method.
