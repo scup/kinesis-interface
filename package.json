@@ -1,22 +1,39 @@
 {
   "name": "kinesis-interface",
-  "version": "1.0.0",
-  "description": "Kinises interface",
-  "main": "app.js",
+  "version": "0.1.0",
+  "description": "Kinisis interface",
+  "main": "src/app.js",
   "scripts": {
-    "test": "mocha test --recursive --timeout 5000"
+    "lint": "eslint src ./**.js",
+    "test": "npm lint && mocha test --recursive"
   },
-  "author": "Joao Santos",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scup/kinesis-interface"
+  },
+  "keywords": [
+    "Javascript",
+    "Kinesis",
+    "Node.js"
+  ],
+  "author": "Scup",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scup/kinesis-interface/issues"
+  },
   "dependencies": {
     "aws-kcl": "^0.5.0",
-    "aws-sdk": "^2.2.40",
-    "chai": "^3.5.0",
+    "aws-sdk": "^2.4.10",
     "dotenv": "^2.0.0",
-    "mocha": "^2.4.5",
-    "request": "^2.69.0",
-    "sinon": "^1.17.3",
-    "winston": "^2.1.1",
-    "metric-bucket": "git+ssh://git@bitbucket.org/scup/metric-bucket.git#v1.2"
+    "request": "^2.74.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.1.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "mocha": "^2.5.3",
+    "sinon": "^1.17.5"
   }
 }
