@@ -1,4 +1,6 @@
-# Kinisis Interface
+# Kinesis Interface
+
+This application acts as a wrapper to Amazon KCL (Kinesis Client Library) for Node.js.
 
 The Kinisis Interface process kcl processRecords method and send records to a destination(http server).
 
@@ -9,7 +11,7 @@ When receive a response from the destination, some actions need to be made:
 1. Move kinesis pointer using checkpoint method with the last.
 2. execute the callback method.
 
-#### status code 304 or error code ECONNREFUSED. (destination is busy or offline)  
+#### status code 304 or error code ECONNREFUSED. (destination is busy or offline)
 
 1. Execute the callback method (only)
 
@@ -20,7 +22,7 @@ When receive a response from the destination, some actions need to be made:
 3. Move kinesis pointer using checkpoint method with the last.
 4. execute the callback method.
 
-## Running kcl 
+## Running kcl
 
 1. install java
 
