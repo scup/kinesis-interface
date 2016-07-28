@@ -6,7 +6,7 @@
   require('dotenv').load({ silent: true });
 
   settings.logger = {
-    file: process.env.LOGGER_FILE || './log/kinesis-interface.log',
+    file: process.env.LOGGER_FILE,
     level: process.env.LOGGER_LEVEL || 'info'
   };
 

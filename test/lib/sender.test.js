@@ -85,13 +85,12 @@
     });
   });
 
-  it('sender should send records, dont move pointer and only complete ' +
+  it('sender should send records, do not move pointer and only complete ' +
      'callback when receive http error code ECONNREFUSED', function (done) {
     // Given
     var sender = require('../../src/lib/sender.js');
 
     var logRecordsSpy = sandbox.spy(sender, 'logRecords');
-    var metricBucketSpy = sandbox.spy(sender.metricBucket, 'put');
 
     sandbox.stub(sender, 'request', function (params, callback) {
       callback({ code: 'ECONNREFUSED' }, { statusCode: 666 }); // Evil lives here
@@ -106,7 +105,6 @@
     sender.run(processRecordsInput, shardId, function () {
       // Then
       chai.assert.equal(0, logRecordsSpy.callCount);
-      chai.assert.equal(0, metricBucketSpy.callCount);
       chai.assert.equal(0, processRecordsInput.checkpointer.checkpoint.callCount);
       chai.assert.equal(1, 1);
       done();
@@ -119,14 +117,9 @@
     var sender = require('../../src/lib/sender.js');
 
     var logRecordsSpy = sandbox.spy(sender, 'logRecords');
-    var metricBucketSpy = sandbox.spy(sender.metricBucket, 'put');
 
     sandbox.stub(sender, 'request', function (params, callback) {
       callback({ code: 'ECONNRESET' }, { statusCode: 666 }); // Evil lives here
-    });
-
-    sandbox.stub(sender, 'logS3', function () {
-      return true;
     });
 
     sandbox.stub(processRecordsInput.checkpointer, 'checkpoint',
@@ -138,21 +131,16 @@
     sender.run(processRecordsInput, shardId, function () {
       // Then
       chai.assert.equal(1, logRecordsSpy.callCount);
-      chai.assert.equal(1, metricBucketSpy.callCount);
       chai.assert.equal(1, processRecordsInput.checkpointer.checkpoint.callCount);
       chai.assert.equal(1, 1);
       done();
     });
   });
 
-  it('sender can send alarm to cloudwatch', function (done) {
+  it('sender can send alarm', function (done) {
     var sender = require('../../src/lib/sender.js');
 
-    var metricBucketSpy = sandbox.spy(sender.metricBucket, 'put');
-
     sender.sendAlarm(100);
-
-    chai.assert.equal(1, metricBucketSpy.callCount);
 
     done();
   });
