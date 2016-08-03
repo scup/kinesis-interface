@@ -1,17 +1,14 @@
 # Kinesis Interface
 
 This application creates a processor to wrap [Amazon KCL (Kinesis Client Library) for Node.js](https://github.com/awslabs/amazon-kinesis-client-nodejs)
-code to read Kinesis stream data.
-
-Each Kinesis Interface processor reads data from a shard and redirects its data to a REST service (called here 'Destination'),
-moving the stream pointer as the server responds with success or error.
+code to read Kinesis stream data and forward it to a REST service, moving the stream pointer as the server responds with success or error.
 
 ## How it works?
 
 When the application starts, a processor is registered in KCL to execute the following steps:
 
 1. Receives data from Kinesis;
-2. Send Kinesis raw record from Destination endpoint;
+2. Send Kinesis raw record to a configured REST endpoint via HTTP Post;
 3. Receives the endpoint response and apply one of the processor actions:
 
 #### The processor receives HTTP Status Code 200 (OK)
@@ -19,7 +16,7 @@ When the application starts, a processor is registered in KCL to execute the fol
 1. Move pointer to another record (calling the KCL Checkpointer)
 2. Mark record processing as complete (signalizing to KCL Callback)
 
-#### The processor receives HTTP Status Code 304 (Not modified) or error code ECONNREFUSED (the Destination endpoint is busy or offline)
+#### The processor receives HTTP Status Code 304 (Not modified) or error code ECONNREFUSED (the REST endpoint is busy or offline)
 
 1. Mark record processing as complete (signalizing to KCL Callback)
 
@@ -44,7 +41,7 @@ The Kinesis Interface and KCL read some configurations through environment varia
 Environment variable | Description
 -------------------- | -----------
 NODE_ENV | Description of the application environment (production, quality assurance, development)
-DESTINATION_URL | Url of the Destination REST service that will receive Kinesis data
+DESTINATION_URL | Url of the REST service that will receive Kinesis data by HTTP Post
 LOGGER_FILE | Location of the application log file
 LOGGER_LEVEL | Defines the priority of the logs to be written. For more information see [Winston documentation](https://github.com/winstonjs/winston#logging-levels)
 AWS_ACCESS_KEY_ID | Amazon Access Key used to connect in Kinesis
