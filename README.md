@@ -3,6 +3,8 @@
 This application creates a processor to wrap [Amazon KCL (Kinesis Client Library) for Node.js](https://github.com/awslabs/amazon-kinesis-client-nodejs)
 code to read Kinesis stream data and forward it to a REST service, moving the stream pointer as the server responds with success or error.
 
+To see an example how this interface works, you can run an example with [Kinesis Interface demo](https://github.com/scup/kinesis-interface-demo).
+
 ## How it works?
 
 When the application starts, a processor is registered in KCL to execute the following steps:
