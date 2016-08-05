@@ -34,7 +34,7 @@ When the application starts, a processor is registered in KCL to execute the fol
 ## System requirements
 
 1. Java 8 or greater
-2. Node.js 5.0 or greater
+2. Node.js 5.6 or greater
 
 ## System variables
 
