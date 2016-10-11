@@ -1,5 +1,7 @@
 # Kinesis Interface
 
+DEPRECATED: instead using KCL, now we are using AWS Lambda to consume Kinesis data.
+
 This application creates a processor to wrap [Amazon KCL (Kinesis Client Library) for Node.js](https://github.com/awslabs/amazon-kinesis-client-nodejs)
 code to read Kinesis stream data and forward it to a REST service, moving the stream pointer as the server responds with success or error.
 
